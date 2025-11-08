@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_08_025428) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_08_025610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
 
+  create_table "articles", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "title"
+    t.text "content"
+    t.vector "embedding", limit: 1536
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["url"], name: "index_articles_on_url", unique: true
+  end
 end
