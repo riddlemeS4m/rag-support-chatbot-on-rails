@@ -1,24 +1,44 @@
-# README
+# QuantHub Support Chatbot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RAG-powered support chatbot using pgvector and OpenAI.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. Install dependencies:
+```bash
+   bundle install
+```
 
-* System dependencies
+2. Setup database:
+```bash
+   rails db:create db:migrate
+```
 
-* Configuration
+3. Add API key to `.env`:
+```
+   OPENAI_API_KEY=sk-...
+```
 
-* Database creation
+4. Sync articles:
+```bash
+   rails articles:sync
+```
 
-* Database initialization
+5. Start server:
+```bash
+   rails server
+```
 
-* How to run the test suite
+## API Usage
+```bash
+curl -X POST http://localhost:3000/api/v1/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "your question here"}'
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Updating Articles
 
-* Deployment instructions
-
-* ...
+Re-run the sync to update articles:
+```bash
+rails articles:sync
+```
